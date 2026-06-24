@@ -1,84 +1,716 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drift Siege - Official Support & Privacy Page</title>
+    <title>Drift Siege - Support & Contact</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+        :root {
+            --primary-color: #1e293b;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #0b0e14;
-            color: #f1f1f1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Language Toggle Logic via CSS */
+        body[lang="tr"] .en { display: none !important; }
+        body[lang="en"] .tr { display: none !important; }
+
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Language Switcher Styles */
+        .lang-switcher {
+            display: flex;
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-btn.active {
+            background: #ffffff;
+            color: var(--primary-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
         .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #161b22;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
         }
-        h1, h2 {
-            color: #00ffcc;
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(180deg, #ffffff 0%, var(--bg-light) 100%);
+            border-bottom: 1px solid var(--border-color);
         }
-        h1 {
-            border-bottom: 2px solid #00ffcc;
-            padding-bottom: 10px;
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 800;
         }
-        a {
-            color: #00ffcc;
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 3fr 2fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: var(--bg-light);
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        button.btn {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.85rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+
+        button.btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-item .label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .info-item .value {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .info-item a {
+            color: var(--accent-color);
             text-decoration: none;
         }
-        a:hover {
+
+        .info-item a:hover {
             text-decoration: underline;
         }
-        .section {
-            margin-bottom: 30px;
+
+        .legal-section {
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 3rem;
         }
+
+        .legal-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .legal-content {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .legal-content h3 {
+            margin: 1.5rem 0 0.75rem 0;
+            color: var(--primary-color);
+        }
+
+        .legal-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .legal-content p {
+            margin-bottom: 1rem;
+        }
+
         footer {
+            background-color: var(--primary-color);
+            color: #ffffff;
             text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #8b949e;
+            padding: 2rem;
+            margin-top: 5rem;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            color: #94a3b8;
+        }
+
+        .alert {
+            padding: 1rem;
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .alert-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
         }
     </style>
 </head>
-<body>
+<body lang="en">
 
-<div class="container">
     <header>
-        <h1>Drift Siege</h1>
-        <p>Welcome to the official home of Drift Siege, developed by <strong>Darklight Bros</strong>.</p>
+        <nav class="navbar">
+            <a href="#" class="logo">Drift Siege</a>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#hero"><span class="tr">Ana Sayfa</span><span class="en">Home</span></a></li>
+                    <li><a href="#support"><span class="tr">Destek</span><span class="en">Support</span></a></li>
+                    <li><a href="#legal"><span class="tr">Gizlilik & Şartlar</span><span class="en">Privacy & Terms</span></a></li>
+                </ul>
+                <div class="lang-switcher">
+                    <button class="lang-btn" id="btn-tr" onclick="changeLanguage('tr')">
+                        <img src="https://flagcdn.com/w20/tr.png" width="20" alt="Türkçe"> TR
+                    </button>
+                    <button class="lang-btn active" id="btn-en" onclick="changeLanguage('en')">
+                        <img src="https://flagcdn.com/w20/gb.png" width="20" alt="English"> EN
+                    </button>
+                </div>
+            </div>
+        </nav>
     </header>
 
-    <div class="section">
-        <h2>App Support & Contact</h2>
-        <p>If you have any questions, feedback, or need assistance with Drift Siege, feel free to reach out to our support team.</p>
-        <p><strong>Contact Email:</strong> <a href="mailto:cagriakinci96@gmail.com">cagriakinci96@gmail.com</a></p>
-    </div>
+    <section class="hero" id="hero">
+        <h1>
+            <span class="tr">Drift Siege Destek Merkezi</span>
+            <span class="en">Drift Siege Support Center</span>
+        </h1>
+        <p>
+            <span class="tr">Oyunumuzla ilgili sorularınız, geri bildirimleriniz veya teknik destek talepleriniz için bize ulaşın.</span>
+            <span class="en">Contact us for any questions, feedback, or technical support requests regarding our game.</span>
+        </p>
+    </section>
 
-    <div class="section">
-        <h2>Privacy Policy</h2>
-        <p><strong>Effective Date: June 24, 2026</strong></p>
-        <p>Your privacy is important to us. This Privacy Policy governs the use of the mobile application Drift Siege.</p>
-        
-        <h3>Information Collection and Use</h3>
-        <p>The app uses third-party services that may collect information used to identify you. We integrate <strong>Google AdMob</strong> to serve advertisements within the game. AdMob may collect device-specific data such as advertising identifiers (IDFA for iOS) to provide personalized ads.</p>
+    <div class="container" id="support">
+        <div class="grid">
+            <div class="card">
+                <h2>
+                    <span class="tr">İletişim Formu</span>
+                    <span class="en">Contact Form</span>
+                </h2>
+                
+                <div class="alert" id="successAlert">
+                    <span class="tr">Mesajınız başarıyla gönderildi! En kısa sürede dönüş sağlayacağız.</span>
+                    <span class="en">Your message has been sent successfully! We will get back to you shortly.</span>
+                </div>
+                <div class="alert alert-error" id="errorAlert">
+                    <span class="tr">Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.</span>
+                    <span class="en">An error occurred while sending your message. Please try again.</span>
+                </div>
+                
+                <form id="supportForm" action="https://formspree.io/f/mpqnyzpe" method="POST" onsubmit="handleFormspreeSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">
+                            <span class="tr">Adınız Soyadınız</span>
+                            <span class="en">Full Name</span>
+                        </label>
+                        <input type="text" id="name" name="name" required 
+                               data-tr="Örn. Ahmet Yılmaz" 
+                               data-en="e.g. John Doe" 
+                               placeholder="e.g. John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">
+                            <span class="tr">E-posta Adresiniz</span>
+                            <span class="en">Email Address</span>
+                        </label>
+                        <input type="email" id="email" name="email" required 
+                               data-tr="name@example.com" 
+                               data-en="name@example.com" 
+                               placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">
+                            <span class="tr">Konu</span>
+                            <span class="en">Subject</span>
+                        </label>
+                        <input type="text" id="subject" name="subject" required 
+                               data-tr="Örn. Hata Raporu, Oyun Önerisi" 
+                               data-en="e.g. Bug Report, Feature Request" 
+                               placeholder="e.g. Bug Report, Feature Request">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">
+                            <span class="tr">Mesajınız</span>
+                            <span class="en">Your Message</span>
+                        </label>
+                        <textarea id="message" name="message" rows="6" required 
+                                  data-tr="Lütfen destek almak istediğiniz konuyu detaylıca açıklayın..." 
+                                  data-en="Please explain the issue or feedback in detail..." 
+                                  placeholder="Please explain the issue or feedback in detail..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" id="submitBtn">Send Support Request</button>
+                </form>
+            </div>
 
-        <h3>Data Retention</h3>
-        <p>We do not collect, store, or share any personal identity data on our own servers. All data processing related to ads is managed securely by Google AdMob in accordance with their privacy guidelines.</p>
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h2>
+                        <span class="tr">Doğrudan İletişim</span>
+                        <span class="en">Direct Contact</span>
+                    </h2>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                        <span class="tr">Form doldurmak yerine doğrudan destek ekibimize e-posta göndererek de iletişime geçebilirsiniz.</span>
+                        <span class="en">Instead of filling out the form, you can directly contact our support team by sending an email.</span>
+                    </p>
+                    
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <span class="label">
+                                <span class="tr">Destek E-posta</span>
+                                <span class="en">Support Email</span>
+                            </span>
+                            <span class="value"><a href="mailto:bros.darklight@gmail.com">bros.darklight@gmail.com</a></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">
+                                <span class="tr">Uygulama Adı</span>
+                                <span class="en">App Name</span>
+                            </span>
+                            <span class="value">Drift Siege</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">
+                                <span class="tr">Platformlar</span>
+                                <span class="en">Platforms</span>
+                            </span>
+                            <span class="value">iOS (App Store) & Android (Google Play)</span>
+                        </div>
+                    </div>
+                </div>
 
-        <h3>Changes to This Privacy Policy</h3>
-        <p>We may update our Privacy Policy from time to time. You are advised to review this page periodically for any changes.</p>
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-muted);">
+                    <span class="tr">Apple App Store yönergeleri gereği, bu destek sayfası tüm kullanıcılara açık, aktif ve doğrudan iletişim kanalı sunacak şekilde tasarlanmıştır.</span>
+                    <span class="en">As per Apple App Store guidelines, this support page is designed to offer an open, active, and direct communication channel for all users.</span>
+                </div>
+            </div>
+        </div>
+
+        <section class="legal-section" id="legal">
+            <div class="legal-tabs">
+                <button class="tab-btn active" onclick="switchTab('privacy')">
+                    <span class="tr">Gizlilik Politikası</span>
+                    <span class="en">Privacy Policy</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab('terms')">
+                    <span class="tr">Kullanım Şartları</span>
+                    <span class="en">Terms of Service</span>
+                </button>
+            </div>
+            
+<div id="privacy-content" class="legal-content">
+                <div class="tr">
+                    <h3>Gizlilik Politikası</h3>
+                    <p>Bu gizlilik politikası, Çağrı AKINCI ("Hizmet Sağlayıcı") tarafından Reklam Destekli bir hizmet olarak oluşturulan mobil cihazlar için Drift Siege uygulaması ("Oyun") için geçerlidir. Bu hizmet "OLDUĞU GİBİ" kullanılması amaçlanmıştır.</p>
+
+                    <h3>Bilgi Toplama ve Kullanım</h3>
+                    <p>Oyun, indirip kullandığınızda bilgi toplar. Bu bilgiler şunları içerebilir:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 1rem;">
+                        <li>Cihazınızın İnternet Protokolü adresi (örn. IP adresi)</li>
+                        <li>Oyunun ziyaret ettiğiniz sayfaları, ziyaretinizin saati ve tarihi, bu sayfalarda geçirilen süre</li>
+                        <li>Oyunda geçirilen süre</li>
+                        <li>Mobil cihazınızda kullandığınız işletim sistemi</li>
+                    </ul>
+                    <p>Oyun, mobil cihazınızın konumu hakkında kesin bilgi toplamaz.</p>
+                    <p>Oyun, verilerinizi işlemek veya özellikler sağlamak için Yapay Zeka (AI) teknolojilerini kullanmaz.</p>
+                    <p>Hizmet Sağlayıcı, size önemli bilgiler, gerekli bildirimler ve pazarlama promosyonları sağlamak amacıyla zaman zaman sizinle iletişime geçmek için sağladığınız bilgileri kullanabilir.</p>
+
+                    <h3>Üçüncü Taraf Erişimi</h3>
+                    <p>Hizmet Sağlayıcıya Oyunu ve hizmetlerini iyileştirmesinde yardımcı olmak için dış hizmetlere periyodik olarak yalnızca toplu, anonimleştirilmiş veriler iletilir. Hizmet Sağlayıcı, bilgilerinizi bu gizlilik bildiriminde açıklanan şekillerde üçüncü taraflarla paylaşabilir.</p>
+                    <p>Lütfen Oyunun, verilerin işlenmesi konusunda kendi Gizlilik Politikalarına sahip üçüncü taraf hizmetlerini kullandığını unutmayın. Oyun tarafından kullanılan üçüncü taraf hizmet sağlayıcıların Gizlilik Politikalarının bağlantıları aşağıdadır:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 1rem;">
+                        <li>Google Play Services</li>
+                        <li>AdMob</li>
+                        <li>Firebase Crashlytics</li>
+                    </ul>
+
+                    <h3>Veri Saklama Politikası</h3>
+                    <p>Hizmet Sağlayıcı, Kullanıcı Tarafından Sağlanan verileri Oyunu kullandığınız sürece ve sonrasında makul bir süre boyunca saklayacaktır. Oyun aracılığıyla sağladığınız Kullanıcı Tarafından Sağlanan Verileri silmelerini isterseniz, lütfen bros.darklight@gmail.com adresinden iletişime geçin; makul bir süre içinde yanıt vereceklerdir.</p>
+
+                    <h3>Çocuklar</h3>
+                    <p>Hizmet Sağlayıcı, 13 yaşın altındaki çocuklardan bilerek veri talep etmek veya onlara pazarlama yapmak için Oyunu kullanmaz.</p>
+                    <p>Oyun 13 yaşın altındaki hiç kimseye hitap etmemektedir. Hizmet Sağlayıcı, 13 yaşın altındaki çocuklardan bilerek kişisel olarak tanımlanabilir bilgiler toplamaz. Hizmet Sağlayıcı, 13 yaşın altında bir çocuğun kişisel bilgi sağladığını keşfederse, bunu derhal sunucularından silecektir. Ebeveyn veya vasi iseniz ve çocuğunuzun bize kişisel bilgiler sağladığının farkındaysanız, gerekli işlemleri yapabilmeleri için lütfen Hizmet Sağlayıcı (bros.darklight@gmail.com) ile iletişime geçin.</p>
+
+                    <h3>Güvenlik</h3>
+                    <p>Hizmet Sağlayıcı, bilgilerinizin gizliliğini koruma konusunda hassastır. Hizmet Sağlayıcı, işlediği ve sürdürdüğü bilgileri korumak için fiziksel, elektronik ve prosedürel önlemler sağlar.</p>
+
+                    <h3>Değişiklikler</h3>
+                    <p>Bu Gizlilik Politikası herhangi bir nedenle zaman zaman güncellenebilir. Hizmet Sağlayıcı, bu sayfayı yeni Gizlilik Politikası ile güncelleyerek Gizlilik Politikasındaki herhangi bir değişikliği size bildirecektir. Devam eden kullanım, tüm değişikliklerin onaylanması olarak kabul edildiğinden, herhangi bir değişiklik için bu Gizlilik Politikasını düzenli olarak incelemeniz tavsiye edilir.</p>
+                    <p>Bu gizlilik politikası 24 Haziran 2026 tarihinden itibaren geçerlidir.</p>
+
+                    <h3>Bize Ulaşın</h3>
+                    <p>Oyunu kullanırken gizlilikle ilgili herhangi bir sorunuz veya uygulamalar hakkında sorularınız varsa, lütfen bros.darklight@gmail.com adresinden e-posta yoluyla Hizmet Sağlayıcı ile iletişime geçin.</p>
+                </div>
+
+                <div class="en">
+                    <h3>Privacy Policy</h3>
+                    <p>This privacy policy applies to the Drift Siege app (hereby referred to as "Application") for mobile devices that was created by Çağrı AKINCI (hereby referred to as "Service Provider") as an Ad Supported service. This service is intended for use "AS IS".</p>
+
+                    <h3>Information Collection and Use</h3>
+                    <p>The Application collects information when you download and use it. This information may include information such as:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 1rem;">
+                        <li>Your device's Internet Protocol address (e.g. IP address)</li>
+                        <li>The pages of the Application that you visit, the time and date of your visit, the time spent on those pages</li>
+                        <li>The time spent on the Application</li>
+                        <li>The operating system you use on your mobile device</li>
+                    </ul>
+                    <p>The Application does not gather precise information about the location of your mobile device.</p>
+                    <p>The Application does not use Artificial Intelligence (AI) technologies to process your data or provide features.</p>
+                    <p>The Service Provider may use the information you provided to contact you from time to time to provide you with important information, required notices and marketing promotions.</p>
+
+                    <h3>Third Party Access</h3>
+                    <p>Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.</p>
+                    <p>Please note that the Application utilizes third-party services that have their own Privacy Policy about handling data. Below are the links to the Privacy Policy of the third-party service providers used by the Application:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 1rem;">
+                        <li>Google Play Services</li>
+                        <li>AdMob</li>
+                        <li>Firebase Crashlytics</li>
+                    </ul>
+
+                    <h3>Data Retention Policy</h3>
+                    <p>The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. If you'd like them to delete User Provided Data that you have provided via the Application, please contact them at bros.darklight@gmail.com and they will respond in a reasonable time.</p>
+
+                    <h3>Children</h3>
+                    <p>The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 13.</p>
+                    <p>The Application does not address anyone under the age of 13. The Service Provider does not knowingly collect personally identifiable information from children under 13 years of age. In the case the Service Provider discover that a child under 13 has provided personal information, the Service Provider will immediately delete this from their servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact the Service Provider (bros.darklight@gmail.com) so that they will be able to take the necessary actions.</p>
+
+                    <h3>Security</h3>
+                    <p>The Service Provider is concerned about safeguarding the confidentiality of your information. The Service Provider provides physical, electronic, and procedural safeguards to protect information the Service Provider processes and maintains.</p>
+
+                    <h3>Changes</h3>
+                    <p>This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.</p>
+                    <p>This privacy policy is effective as of June 24, 2026</p>
+
+                    <h3>Contact Us</h3>
+                    <p>If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at bros.darklight@gmail.com.</p>
+                </div>
+            </div>
+
+            <div id="terms-content" class="legal-content" style="display: none;">
+                <div class="tr">
+                    <h3>Kullanım Şartları</h3>
+                    <p><strong>Son Güncelleme:</strong> 24 Haziran 2026</p>
+                    <p>Drift Siege uygulamasını indirerek veya kullanarak, bu şartlar sizin için otomatik olarak geçerli olacaktır. Bu nedenle, oyunu oynamadan önce bunları dikkatlice okuduğunuzdan emin olmalısınız.</p>
+
+                    <h3>1. Hizmet Kapsamı ve Sorumluluk Reddi</h3>
+                    <p>Oyun, kullanıcılara araba drift mekaniklerine dayalı, bölge fethetme ve hayatta kalma (boss savaşları) dinamikleri içeren bir arcade aksiyon deneyimi sunmak üzere tasarlanmıştır. Hizmet Sağlayıcı (Çağrı AKINCI) oyun içinde sağlanan deneyimin sorunsuz olması için çalışsa da, hizmet herhangi bir garanti olmaksızın "olduğu gibi" sağlanmaktadır.</p>
+
+                    <h3>2. Fikri Mülkiyet</h3>
+                    <p>Oyunun kendisi (kodlar, tasarımlar, mekanikler) ve bununla ilgili tüm ticari markalar, telif hakları, veritabanı hakları ve diğer fikri mülkiyet hakları Hizmet Sağlayıcıya aittir. Yazılı izin olmaksızın oyunu, oyunun herhangi bir bölümünü veya ticari markalarımızı hiçbir şekilde kopyalayamaz, değiştiremezsiniz.</p>
+
+                    <h3>3. İletişim</h3>
+                    <p>Kullanım Şartları hakkında herhangi bir sorunuz veya öneriniz varsa, bros.darklight@gmail.com adresinden iletişime geçmekten çekinmeyin.</p>
+                </div>
+                
+                <div class="en">
+                    <h3>Terms of Service</h3>
+                    <p><strong>Last Updated:</strong> June 24, 2026</p>
+                    <p>By downloading or using the Drift Siege app (hereby referred to as "Application"), these terms will automatically apply to you. You should make sure therefore that you read them carefully before playing the game.</p>
+
+                    <h3>1. Scope of Service and Disclaimer</h3>
+                    <p>The Application is designed to provide users with an arcade action experience featuring car drift mechanics, territory capturing, and survival dynamics (boss fights). While the Service Provider (Çağrı AKINCI) strives to ensure a smooth gaming experience, the service is provided "as is" without any warranties.</p>
+
+                    <h3>2. Intellectual Property</h3>
+                    <p>The game itself (codes, designs, mechanics), and all the trademarks, copyright, database rights, and other intellectual property rights related to it, belong to the Service Provider. You are not allowed to copy, modify the game, any part of the game, or our trademarks in any way without written permission.</p>
+
+                    <h3>3. Contact Us</h3>
+                    <p>If you have any questions or suggestions about the Terms of Service, do not hesitate to contact us at bros.darklight@gmail.com.</p>
+                </div>
+            </div>
+        </section>
     </div>
 
     <footer>
-        <p>&copy; 2026 Darklight Bros. All rights reserved.</p>
+        <p>
+            <span class="tr">&copy; 2026 Drift Siege. Tüm Hakları Saklıdır.</span>
+            <span class="en">&copy; 2026 Drift Siege. All Rights Reserved.</span>
+        </p>
     </footer>
-</div>
 
+    <script>
+        // Dil Değiştirme Fonksiyonu
+        let currentLang = 'en';
+        
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.body.setAttribute('lang', lang);
+            
+            // Buton aktiflik durumlarını güncelle
+            document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            
+            // Placeholder (Yer tutucu) metinlerini dile göre değiştir
+            const inputs = document.querySelectorAll('input[data-' + lang + '], textarea[data-' + lang + ']');
+            inputs.forEach(input => {
+                input.placeholder = input.getAttribute('data-' + lang);
+            });
+            
+            // Gönder butonunun yazısını eğer aktifse dile göre değiştir
+            const submitBtn = document.getElementById('submitBtn');
+            if(!submitBtn.disabled) {
+                submitBtn.textContent = lang === 'tr' ? "Destek Talebi Gönder" : "Send Support Request";
+            }
+        }
+
+        // Formspree Arka Plan Gönderim İşlemi
+        async function handleFormspreeSubmit(event) {
+            event.preventDefault(); 
+            
+            const form = event.target;
+            const data = new FormData(form);
+            const submitBtn = document.getElementById('submitBtn');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            
+            // Dile göre "Gönderiliyor..." yazısı
+            submitBtn.textContent = currentLang === 'tr' ? "Gönderiliyor..." : "Sending...";
+            submitBtn.disabled = true;
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'none';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    successAlert.style.display = 'block';
+                    form.reset();
+                    // Gönderim sonrası yer tutucuları tekrar ayarla
+                    changeLanguage(currentLang);
+                    window.scrollTo({
+                        top: successAlert.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    errorAlert.style.display = 'block';
+                }
+            } catch (error) {
+                errorAlert.style.display = 'block';
+            } finally {
+                // Dile göre butonu eski haline getir
+                submitBtn.textContent = currentLang === 'tr' ? "Destek Talebi Gönder" : "Send Support Request";
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Sekme Değiştirme İşlemi
+        function switchTab(type) {
+            const privacyContent = document.getElementById('privacy-content');
+            const termsContent = document.getElementById('terms-content');
+            const tabs = document.querySelectorAll('.tab-btn');
+
+            if (type === 'privacy') {
+                privacyContent.style.display = 'block';
+                termsContent.style.display = 'none';
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            } else {
+                privacyContent.style.display = 'none';
+                termsContent.style.display = 'block';
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
